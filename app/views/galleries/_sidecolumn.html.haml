@@ -1,0 +1,4 @@
+%h1= link_to("Galleries", galleries_path)
+%ul.list_of_links
+  - for gallery in @galleries
+    %li= link_to(gallery.title, gallery)

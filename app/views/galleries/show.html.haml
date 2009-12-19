@@ -1,0 +1,30 @@
+- content_for :meta_title do
+  = h @gallery.title
+%h1
+  = h @gallery.title
+
+- if @gallery.slideshow?
+  - @slideshow = true
+
+  #images-full.galleryview
+    - for image in @gallery.images
+      .panel
+        = image_tag(image.image.url(:large), :title => image.title, :alt => image.caption)
+        .panel-overlay
+          %h2
+            = h image.title
+          %p
+            = h image.caption
+    %ul.filmstrip
+      - for image in @gallery.images
+        %li
+          = image_tag(image.image.url(:small), :title => image.title, :alt => image.caption)
+- else
+  - for image in @gallery.images.sort_by(&:position)
+    .image
+      .image-thumb-container
+        .image-thumb
+          - unless image.description.blank?
+            = link_to image_tag(image.image.url(:medium), :alt => h(image.caption)), [@gallery, image]
+          - else
+            = link_to image_tag(image.image.url(:medium), :alt => h(image.caption)), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title)

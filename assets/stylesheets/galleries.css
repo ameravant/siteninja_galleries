@@ -1,0 +1,16 @@
+.gallery { float: left; margin: 0 6px 20px 0; }
+.gallery-thumb-container { float: left; padding: 2px; margin-bottom: .5em; border: 2px solid #a6b3bd; }
+.gallery-thumb-container:hover { border: 2px solid #747bd4; }
+.gallery-thumb { height: 125px; overflow: hidden; background-color: #111; }
+.gallery-name { text-align: center; }
+
+.image { float: left; margin: 0 4px 0px 0; }
+.image-thumb-container { float: left; padding: 2px; margin-bottom: .5em; border: 2px solid #a6b3bd; }
+.image-thumb-container:hover { border: 2px solid #747bd4; }
+.image-thumb { height: 125px; overflow: hidden; }
+
+.endrow { margin-right: 0; }
+
+#smoothGallery { width: 880px !important; height: 650px !important; z-index: 999; }
+#smoothGallery a { border: none !important; }
+#smoothGallery a:hover { background: none; }

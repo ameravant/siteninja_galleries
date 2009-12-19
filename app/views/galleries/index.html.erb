@@ -1,0 +1,18 @@
+<%- content_for :meta_title do -%>Image Galleries<%- end -%>
+
+<h1><%= yield(:meta_title).strip %></h1>
+
+<%- if @galleries.empty? -%>
+  <p>No image galleries yet.</p>
+<%- else -%>
+  <%- for gallery in @galleries -%>
+  <div class="gallery<%= cycle nil, nil, nil, ' endrow' %>" id="<%= dom_id gallery %>">
+    <div class="gallery-thumb-container">
+      <div class="gallery-thumb"><%= link_to image_tag(gallery.images.sort_by(&:position).first.image.url(:medium)), gallery %></div>
+    </div>
+    <%= clear %>
+    <div class="big gallery-name"><%= link_to h(gallery.title), gallery %></div>
+    <%= clear %>
+  </div>
+  <%- end -%>
+<%- end -%>

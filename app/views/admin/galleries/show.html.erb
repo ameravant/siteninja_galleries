@@ -1,0 +1,62 @@
+<%- content_for :meta_title do -%><%= h @gallery.name %><%- end -%>
+
+<h1><%= yield :meta_title %></h1>
+
+<div class="box middle">
+  <div id="reorder_status" class="gray float-right" style="display: none;">
+    <%= spinner %> Reordering images...
+  </div>
+  <span class="hmenu">
+    <%= icon "Plus", new_admin_gallery_image_path(@gallery) %>
+    <%= link_to "Add images to this gallery", new_admin_gallery_image_path(@gallery) %>
+  </span>
+  <span class="hmenu">
+    <%= icon "Gear", edit_admin_gallery_path(@gallery) %>
+    <%= link_to "Edit gallery settings", edit_admin_gallery_path(@gallery) %>
+  </span>
+</div>
+
+<br/>
+
+<%- unless @images.empty? -%>
+  <p>
+    <%= icon "Info2" %> Reorder images by clicking and dragging them with your mouse. The first image in 
+    your gallery will be used for the gallery cover.
+  </p>
+
+  <ul id="images">
+  <%- for image in @images -%>
+    <li class="image" id="<%= dom_id image %>">
+      <div class="image-thumb">
+        <%= image_tag(image.image.url(:small), :alt => h(image.caption)) %>
+      </div>
+      <div class="image-options">
+        <%= link_to icon("Search"), image.image.url(:large), :class => "icon lightview", :rel => "set[images]", :title => h(image.caption) %>
+        <%= icon "Write", edit_admin_gallery_image_path(@gallery, image) %>
+        <%= trash_icon(image, [:admin, @gallery, image], "#{image.caption}") %>
+      </div>
+    </li>
+  <%- end -%>
+  </ul>
+  <%= clear %>
+
+  <%- if @gallery.images_count > 1 -%>
+    <%= sortable_element :images,
+      :constraint => false,
+      :url => reorder_admin_gallery_path(@gallery),
+      :method => :put,
+      :loading => "$('ajax_spinner').src='#{spinner_loc}'; $('reorder_status').show();",
+      :success => "$('ajax_spinner').src='#{ok_loc}'",
+      :failure => "$('ajax_spinner').src='#{exclamation_loc}'",
+      :complete => visual_effect(:fade, "reorder_status", :delay => 1)
+    %>
+  <%- end -%>
+<%- end -%>
+
+<br/>
+<h2>Want to delete this gallery?</h2>
+
+<div>
+  <%= icon "Trash", [:admin, @gallery] %>
+  <%= link_to "Yes, delete this gallery.", [:admin, @gallery], :class => "red", :method => :delete, :confirm => "Really delete this gallery? There is no undo!" %>
+</div>
