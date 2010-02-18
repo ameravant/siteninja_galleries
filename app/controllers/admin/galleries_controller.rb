@@ -48,6 +48,8 @@ class Admin::GalleriesController < AdminController
   end
   
   def destroy
+    menu = @gallery.menus.first
+    menu.destroy unless menu.blank?
     @gallery.destroy
     #flash[:notice] = "#{@gallery.title} gallery been deleted."
     respond_to :js
@@ -55,7 +57,10 @@ class Admin::GalleriesController < AdminController
   end
     
   def reorder
-    
+    params["tree"].each_with_index do |id, position|
+      Gallery.update(id, :footer => position + 1)
+    end
+    render :nothing => true
   end
   
   

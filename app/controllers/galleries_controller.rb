@@ -26,6 +26,7 @@ class GalleriesController < ApplicationController
     def find_page
       @tags = Image.tag_counts
       @page = Page.find_by_permalink 'galleries'
+      @menu = @page.menus.first
       @footer_pages = Page.find(:all, :conditions => {:show_in_footer => true}, :order => :footer_pos )
     end
   
