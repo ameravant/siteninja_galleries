@@ -1,0 +1,71 @@
+- content_for :head do
+  %style{:type => "text/css", :media => "screen"}
+    ul.sortable { list-style: none; margin: 4px 0 0 -30px; }
+    ul.sortable ul { margin: 4px 0 0 -20px; }
+    ul.sortable li { line-height: 2em; }
+    ul.sortable li div { line-height: 38px; }
+    div.gallery-thumbnail { display: block; float: left; width: 48px; height: 36px; margin: 1px 5px; }
+    div.gallery-title-header { float: left; width: 60px; font-weight: bold; color: #666; margin: 0 0 0 10px; }
+    div.gallery-options-header { float: right; width: 80px; text-align: left; font-weight: bold; color: #666; }
+    div.gallery-images-header { float: right; width: 100px; text-align: left; font-weight: bold; margin-right: 20px; color: #666; }
+    div.gallery-testimonials-header { float: right; width: 100px; text-align: left; font-weight: bold; margin-right: 20px; color: #666; }
+    div.gallery-status-header { float: right; width: 150px; text-align: left; font-weight: bold; margin-right: 20px; color: #666; }
+    div.gallery-images { float: left; margin-right: 20px; }
+    div.gallery-title { float: left; margin-right: 20px; line-height: 36px; }
+    div.gallery-options { text-align: right; float: right; width: 80px; }
+    div.gallery-images { float: right; margin-right: 20px; width: 100px; text-align: left; }
+    div.gallery-testimonials { float: right; margin-right: 20px; width: 100px; text-align: left; }
+    div.gallery-status { float: right; margin-right: 20px; width: 150px; text-align: left; }
+    ul.sortable li { border-bottom: #ccc 1px solid; }
+    h2.category { font-family: Tahoma, Arial, sans-serif; font-size: 1.2em; margin: 20px 0px 0px 10px}
+%h1= large_icon('Link') + ' ' + "Galleries"
+
+.box
+  #reorder_status.gray.float-right{:style => "display: none"}
+    = spinner
+    Reordering Galleries...
+  %span.hmenu
+    = icon "Plus", new_admin_gallery_path
+    = link_to "Make a new Gallery", new_admin_gallery_path
+%br
+%div.gallery-title-header
+  Title
+%div.gallery-options-header
+  Options
+%div.gallery-images-header
+  Images
+
+= clear
+
+%ul.sortable{:id => "tree"}
+  - for gallery in @galleries
+    %li{:id => "#{dom_id(gallery)}"}
+      .gallery-title
+        = image_tag("#{move_loc}", :class => "icon handle")
+        .gallery-thumbnail
+          = image_tag(gallery.images.sort_by(&:position).first.image.url(:thumb), :class => "icon thumb") unless gallery.images.empty?
+        = link_to(gallery.title, [:edit, :admin, gallery])
+      .gallery-options
+        - if gallery.menus_count > 0
+          = navigation_icon(gallery, gallery.title, "inline")
+        - else
+          = activate_navigation_icon(gallery, [:new, :admin, gallery, :menu], gallery.title, "inline")
+        -if gallery.images_count > 0
+          - if gallery.features_count > 0
+            = defeature_icon(gallery, "/admin/galleries/#{gallery.to_param}/features/1", gallery.title, "inline")
+            = feature_icon(gallery, [:admin, gallery, :features], gallery.title, "none")
+          - else
+            = feature_icon(gallery, [:admin, gallery, :features], gallery.title, "inline")
+            = defeature_icon(gallery, "/admin/galleries/#{gallery.to_param}/features/1", gallery.title, "none")
+        -else
+          =disabled_feature_icon(gallery, [:new, :admin, gallery, :feature], gallery.title)
+        = icon "Write", [:edit, :admin, gallery]
+        = trash_icon(gallery, [:admin, gallery], "#{gallery.title}")
+      .gallery-images
+        = icon "Picture", [:admin, gallery, :images]
+        = link_to gallery.images_count, [:admin, gallery, :images]
+        
+      = clear
+
+    = sortable_element("tree", :url => reorder_admin_galleries_path, :method => :put, :loading => "$('ajax_spinner').src='#{spinner_loc}'; $('reorder_status').show();", :success => "$('ajax_spinner').src='#{ok_loc}'", :failure => "$('ajax_spinner').src='#{exclamation_loc}'", :complete => visual_effect(:fade, "reorder_status", :delay => 1))
+
