@@ -1,7 +1,7 @@
 class Admin::GalleriesController < AdminController
   unloadable # http://dev.rubyonrails.org/ticket/6001
   before_filter :authorization
-  before_filter :find_gallery, :only => [ :edit, :update, :destroy, :reorder ]
+  before_filter :find_gallery, :only => [ :edit, :update, :destroy ]
   add_breadcrumb "Galleries", "admin_galleries_path", :only => [:new, :edit, :show]
   
   def index
@@ -55,10 +55,10 @@ class Admin::GalleriesController < AdminController
     respond_to :js
     #redirect_to admin_galleries_path
   end
-    
+
   def reorder
     params["tree"].each_with_index do |id, position|
-      Gallery.update(id, :footer => position + 1)
+      Gallery.update(id, :position => position + 1)
     end
     render :nothing => true
   end
