@@ -62,10 +62,9 @@ class Admin::GalleriesController < AdminController
     end
     render :nothing => true
   end
-  
-  
+
   private
-  
+
   def find_gallery
     begin
       @gallery = Gallery.find params[:id]
