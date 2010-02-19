@@ -5,12 +5,15 @@ class GalleriesController < ApplicationController
   
   def index
     @galleries = Gallery.public
+    @page = Page.find_by_permalink!('galleries')
     add_breadcrumb "Galleries"
   end
   
   def show
     begin
       @gallery = Gallery.find(params[:id])
+      @page = Page.find_by_permalink!('galleries') if @gallery.menus.empty?
+      @gallery.menus.empty? ? @menu = @page.menus.first : @menu = @gallery.menus.first
       @smoothgallery = true if @gallery.slideshow?
       add_breadcrumb "Galleries", galleries_path
       add_breadcrumb @gallery.title 
@@ -25,8 +28,6 @@ class GalleriesController < ApplicationController
   
     def find_page
       @tags = Image.tag_counts
-      @page = Page.find_by_permalink 'galleries'
-      @menu = @page.menus.first
       @footer_pages = Page.find(:all, :conditions => {:show_in_footer => true}, :order => :footer_pos )
     end
   
