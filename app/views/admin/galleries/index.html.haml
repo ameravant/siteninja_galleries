@@ -51,12 +51,7 @@
         - else
           = activate_navigation_icon(gallery, [:new, :admin, gallery, :menu], gallery.title, "inline")
         -if gallery.images_count > 0
-          - if gallery.features_count > 0
-            = defeature_icon(gallery, "/admin/galleries/#{gallery.to_param}/features/1", gallery.title, "inline")
-            = feature_icon(gallery, [:admin, gallery, :features], gallery.title, "none")
-          - else
-            = feature_icon(gallery, [:admin, gallery, :features], gallery.title, "inline")
-            = defeature_icon(gallery, "/admin/galleries/#{gallery.to_param}/features/1", gallery.title, "none")
+          = feature_icon_select(gallery, gallery.title)
         -else
           =disabled_feature_icon(gallery, [:new, :admin, gallery, :feature], gallery.title)
         = icon "Write", [:edit, :admin, gallery]
