@@ -1,4 +1,5 @@
 class Gallery < ActiveRecord::Base
+  unloadable
   has_permalink :title
   has_many :images, :as => :viewable, :dependent => :destroy
   has_many :features, :as => :featurable, :dependent => :destroy
@@ -19,5 +20,9 @@ class Gallery < ActiveRecord::Base
     
   def to_param
     "#{self.id}-#{self.permalink}"
+  end
+  
+  def blurb
+    self.description
   end
 end
