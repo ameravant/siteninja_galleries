@@ -19,6 +19,27 @@
       - for image in @gallery.images
         %li
           = image_tag(image.image.url(:small), :title => image.title, :alt => image.caption)
+- elsif !@gallery.body.blank?
+  = @gallery.body
+  - content_for :side_column do
+    - @gallery.images.sort_by(&:position).each_with_index do |image, i|
+      - if i == 0
+        .image-thumb-container
+          .main-image-thumb
+            = link_to image_tag(image.image(:slide), :alt => h(image.caption), :style => "width: 280px; "), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title)
+        = clear
+      - else
+        .image
+          .image-thumb-container
+            .image-thumb
+              - unless image.description.blank?
+                = link_to image_tag(image.small_thumbnail, :alt => h(image.caption)), [@gallery, image]
+              - else
+                = link_to image_tag(image.small_thumbnail, :alt => h(image.caption)), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title)
+  - content_for :head do
+    %style{:type => "text/css"}
+      div.image-thumb { height: 55px; width: 85px; }
+
 - else
   - for image in @gallery.images.sort_by(&:position)
     .image

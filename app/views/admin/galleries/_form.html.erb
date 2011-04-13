@@ -8,6 +8,13 @@
   <div><%= f.label :description %></div>
   <div><%= f.text_field :description %></div>
 </div>
+<div class="form-option">
+  <div><%= f.label :body %></div>
+  <div>
+    <p class="note">If this field is filled in, gallery thumbs will display in the side column and body content will display in the main column.</p>
+    <%= f.text_area :body, :class => "mceEditor" %>
+  </div>
+</div>
 
 <div class="form-option">
   <div>
