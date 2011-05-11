@@ -5,20 +5,28 @@
 
 - if @gallery.slideshow?
   - @slideshow = true
-
-  #images-full.galleryview
+  %style{:type => "text/css"}
+    == .panel { width: 860px !important; text-align: center; }
+    == .panel.bottom .panel-overlay-outer { width: 100%; }
+    ==#images-full { background: #{@cms_config['site_settings']['feature_box_background_color'] ? @cms_config['site_settings']['feature_box_background_color'] : '#ccc'}; border: #{@cms_config['site_settings']['feature_box_border'] ? @cms_config['site_settings']['feature_box_border'] : '4px solid #e6e6e6'}; height: 664px !important; }
+    = "div.gv-pointer { margin-top: -4px; }" if @settings.show_feature_thumbs
+    div.gv-panel-content { overflow: hidden; }
+    div.gv-nav-prev { width: 30px; height: 30px; margin-left: -2px; margin-top: -1px; }
+    div.gv-nav-next { width: 30px; height: 30px; margin-right: -2px; margin-top: -1px; }
+  %ul#images-full.galleryview
     - for image in @gallery.images
-      .panel
-        = image_tag(image.image.url(:large), :title => image.title, :alt => image.caption)
-        .panel-overlay
-          %h2
-            = h image.title
-          %p
-            = h image.caption
-    %ul.filmstrip
-      - for image in @gallery.images
-        %li
-          = image_tag(image.image.url(:small), :title => image.title, :alt => image.caption)
+      %li
+        = image_tag(image.small_thumbnail, :title => image.title, :alt => image.title, :style => "width: 85px; height: 55px", :class => "content-img")
+        .gv-panel-content
+          %div{:class => "panel bottom"}
+            .panel-overlay-outer
+              .panel-overlay-inner
+                %h2
+                  = h image.title if image.title
+                %p
+                  = h image.caption
+                = clear
+            = image_tag(image.image(:large), :title => image.title, :alt => image.title)
 - elsif !@gallery.body.blank?
   = @gallery.body
   - content_for :side_column do
