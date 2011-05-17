@@ -50,16 +50,16 @@
       - if i == 0
         .image-thumb-container
           .main-image-thumb
-            = link_to image_tag(image.image(:slide), :alt => h(image.caption), :style => "width: 280px; "), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title)
+            = link_to image_tag(image.image(:slide), :alt => h(image.title), :style => "width: 280px; "), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title)
         = clear
       - else
         .image
           .image-thumb-container
             .image-thumb
               - unless image.description.blank?
-                = link_to image_tag(image.small_thumbnail, :alt => h(image.caption)), [@gallery, image]
+                = link_to image_tag(image.small_thumbnail, :alt => h(image.title), :title => h(image.title)), [@gallery, image]
               - else
-                = link_to image_tag(image.small_thumbnail, :alt => h(image.caption)), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title)
+                = link_to image_tag(image.small_thumbnail, :alt => h(image.title), :title => h(image.title)), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title)
   - content_for :head do
     %style{:type => "text/css"}
       div.image-thumb { height: 55px; width: 85px; }
@@ -70,6 +70,14 @@
       .image-thumb-container
         .image-thumb
           - unless image.description.blank?
-            = link_to image_tag(image.image.url(:medium), :alt => h(image.caption)), [@gallery, image]
+            = link_to image_tag(image.image.url(:medium), :alt => h(image.title), :title => h(image.title)), [@gallery, image]
           - else
-            = link_to image_tag(image.image.url(:medium), :alt => h(image.caption)), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title)
+            = link_to image_tag(image.image.url(:medium), :alt => h(image.title), :title => h(image.title)), image.image.url(:large), :class => "fancy", :rel => "gallery"
+        - unless image.caption.blank?
+          .image-caption
+            image.caption
+    = cycle ("","","",clear)
+  - content_for :head do
+    %style{:type => "text/css"}
+      ==.image-thumb { width: 200px; }
+      ==.image-caption { font-size: .8em; }
