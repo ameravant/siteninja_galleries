@@ -13,22 +13,22 @@
     div.gv-panel-content { overflow: hidden; }
     div.gv-nav-prev { width: 30px; height: 30px; margin-left: -2px; margin-top: -1px; }
     div.gv-nav-next { width: 30px; height: 30px; margin-right: -2px; margin-top: -1px; }
-    :javascript
-      jQuery(document).ready(function() {
-      jQuery('#gallery-slideshow').galleryView({
-      panel_width: 860,
-      panel_height: 600,
-      frame_width: 85,
-      frame_height: 55,
-      overlay_height: 80,
-      overlay_color: '#222',
-      overlay_text_color: 'white',
-      caption_text_color: '#222',
-      background_color: '#333',
-      nav_theme: 'custom',
-      transition_speed: 1000
-      });
-      });
+  :javascript
+    jQuery(document).ready(function() {
+    jQuery('#gallery-slideshow').galleryView({
+    panel_width: 860,
+    panel_height: 600,
+    frame_width: 85,
+    frame_height: 55,
+    overlay_height: 80,
+    overlay_color: '#222',
+    overlay_text_color: 'white',
+    caption_text_color: '#222',
+    background_color: '#333',
+    nav_theme: 'custom',
+    transition_speed: 1000
+    });
+    });
   %ul#gallery-slideshow.galleryview
     - for image in @gallery.images
       %li
