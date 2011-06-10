@@ -10,6 +10,8 @@ class Gallery < ActiveRecord::Base
   validates_numericality_of :slideshow_delay_in_seconds, :allow_blank => true
   named_scope :public, :conditions => ["hidden = ? and images_count > ?", false, 0], :order => "title"
   default_scope :order => "position"
+  accepts_nested_attributes_for :images
+  
   def name # for model consistency, name is treated as title
     self.title
   end
