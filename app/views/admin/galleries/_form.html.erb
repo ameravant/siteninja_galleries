@@ -8,6 +8,9 @@
   <div><%= f.label :description %></div>
   <div><%= f.text_field :description %></div>
 </div>
+<%- fancy_submit admin_galleries_path do -%>
+  <%= f.submit "Save gallery" %>
+<%- end -%>
 <div class="form-option">
   <div><%= f.label :body %></div>
   <div>

@@ -1,0 +1,10 @@
+- if @gallery
+  - @image_list = @gallery.images
+- if @image_list and !@image_list.empty?
+  .side-column-section
+    %ul.list-of-links
+      - for image in @image_list
+        - if @image and @image == image
+          %li.selected= image.title
+        - else
+          %li= link_to(image.title, [@gallery, image])

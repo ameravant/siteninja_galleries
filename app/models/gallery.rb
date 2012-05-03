@@ -4,6 +4,7 @@ class Gallery < ActiveRecord::Base
   has_many :images, :as => :viewable, :dependent => :destroy
   has_many :features, :as => :featurable, :dependent => :destroy
   has_many :menus, :as => :navigatable, :dependent => :destroy
+  belongs_to :column
   belongs_to :user, :counter_cache => true
   validates_presence_of :user_id, :title
   validates_presence_of :slideshow_delay_in_seconds, :if => :is_slideshow?, :message => "must be entered if slideshow is enabled"

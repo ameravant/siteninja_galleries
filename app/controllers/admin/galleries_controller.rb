@@ -2,6 +2,7 @@ class Admin::GalleriesController < AdminController
   unloadable # http://dev.rubyonrails.org/ticket/6001
   before_filter :authorization
   before_filter :find_gallery, :only => [ :edit, :update, :destroy ]
+  before_filter :get_side_columns
   add_breadcrumb "Galleries", "admin_galleries_path", :only => [:new, :edit, :show]
   
   def index
@@ -65,6 +66,10 @@ class Admin::GalleriesController < AdminController
 
   private
 
+  def get_side_columns
+    @side_columns = Column.all(:conditions => {:column_location => "side_column"})
+  end
+  
   def find_gallery
     begin
       @gallery = Gallery.find params[:id]
