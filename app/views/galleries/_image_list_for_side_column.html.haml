@@ -1,5 +1,5 @@
-- if @gallery
-  - @image_list = @gallery.images
+- if @owner
+  - @image_list = @owner.images
 - if @image_list and !@image_list.empty?
   .side-column-section
     %ul.list-of-links
