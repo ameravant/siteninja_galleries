@@ -7,4 +7,4 @@
         - if @image and @image == image
           %li.selected= image.title
         - else
-          %li= link_to(image.title, [@gallery, image])
+          %li= link_to(image.title, [@owner, image])
