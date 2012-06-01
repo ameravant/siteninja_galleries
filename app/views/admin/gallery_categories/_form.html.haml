@@ -1,0 +1,22 @@
+= f.error_messages
+.responsive-form
+  .main-fields
+    %h2.title.form-label= f.label :title, "Title"
+    = f.text_field :title, :class => "big-input", :placeholder => "Generates the permalink."
+  #main-details.details.options
+    #options
+      %dl
+        %dt.form-label
+          = f.label :template_id
+        %dd.form-option
+          = f.select :template_id, @templates.collect {|ac| [ac.title, ac.id]}, {:include_blank => "Select Template"}
+      %dl
+        %dt.form-label
+          = f.label :column_id, "Side Column"
+        %dd.form-option
+          = f.select :column_id, Column.all(:conditions => {:column_location => "side_column"}).collect {|ac| [ac.title, ac.id]}, {:include_blank => "Select Side Column"}
+%br
+%br
+&nbsp;
+- fancy_submit admin_event_categories_path do
+  = f.submit "Save category"

@@ -10,7 +10,7 @@
 .image-thumb { height: 125px; overflow: hidden; }
 
 .endrow { margin-right: 0; }
-
+.sidebar div.image-thumb { height: 55px; width: 85px; }
 #smoothGallery { width: 880px !important; height: 650px !important; z-index: 999; }
 #smoothGallery a { border: none !important; }
 #smoothGallery a:hover { background: none; }

@@ -12,9 +12,18 @@ class GalleriesController < ApplicationController
   def show
     begin
       @gallery = Gallery.find(params[:id])
+      @owner = @gallery
       @page = Page.find_by_permalink!('galleries') if @gallery.menus.empty?
       @gallery.menus.empty? ? @menu = @page.menus.first : @menu = @gallery.menus.first
       @smoothgallery = true if @gallery.slideshow?
+      if !@gallery.column.blank? or !@page.column.blank?
+        if @gallery.column.blank?
+          @side_column_sections = @page.column.column_sections
+        else
+          @side_column_sections = @gallery.column.column_sections
+        end
+      end
+      @gallery_category = @gallery.gallery_category unless @gallery.gallery_category.blank?
       add_breadcrumb "Galleries", galleries_path
       add_breadcrumb @gallery.title 
     rescue ActiveRecord::RecordNotFound

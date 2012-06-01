@@ -1,0 +1,42 @@
+- content_for :meta_title do
+  = "Gallery Categories"
+
+%h1= large_icon('Folder2') + ' ' + yield(:meta_title).strip
+
+%div.box
+  %span.hmenu
+    = icon "Plus", new_admin_gallery_category_path
+    = link_to "Make a new category", new_admin_gallery_category_path
+  = clear
+
+%br
+
+%table{ :cellspacing => "0" }
+  %thead
+    %tr
+      %th Title
+      %th Galleries
+      %th.center Options
+  %tbody
+    - for gallery_category in @gallery_categories do
+      %tr[gallery_category]{ :class => cycle('odd','even') }
+        %td= link_to h(gallery_category.title), edit_admin_gallery_category_path(gallery_category)
+        %td= number_with_delimiter(gallery_category.galleries.count)
+        %td.center
+          - if gallery_category.menus_count > 0
+            = navigation_icon(gallery_category, gallery_category.title, "inline")
+          - else
+            = activate_navigation_icon(gallery_category, [:new, :admin, gallery_category, :menu], gallery_category.title, "inline")
+          = icon "Write", edit_admin_gallery_category_path(gallery_category)
+          = trash_icon(gallery_category, admin_gallery_category_path(gallery_category), "the #{gallery_category.title} category")
+
+%br
+
+%p
+  %strong Note about deleting categories:
+  If you delete a category, galleries will no longer be assigned to it. They will
+  still be able to be viewed, but not browsed by category until they are re-assigned to
+  a new category. The
+  = link_to "Gallery list", admin_galleries_path
+  will notify you of galleries that do not have a category assignment.
+

@@ -14,10 +14,14 @@
   #main-details.details.options 
     #options
       %h3 Gallery Options
+      - unless GalleryCategory.all.empty?
+        = f.label :gallery_category_id, "Category"
+        %br
+        = collection_select(:gallery, :gallery_category_id, GalleryCategory.all, :id, :title, {:include_blank => "Select a Gallery Category"}, :class => "select")
+        %br
       = f.label :column_id, "Side Column"
       %br
       = collection_select(:gallery, :column_id, @side_columns, :id, :title, {:include_blank => "Select a Side Column"}, :class => "select")
-      
       %br
       = f.check_box :hidden
       = f.label :hidden, "Hide this gallery"

@@ -79,9 +79,11 @@
         - unless image.caption.blank?
           .image-caption
             =image.caption
-    = cycle ("","","",clear)
+  .clear
   - content_for :head do
     %style{:type => "text/css"}
-      ==.image-thumb { width: 200px; }
-      ==.image-caption { font-size: .8em; }
-      ==.image-thumb-container { width: 200px; }
+      ==.main-column .image-thumb { width: 200px; }
+      ==.main-column .image-caption { font-size: .8em; }
+      ==.main-column .image-thumb-container { width: 200px; }
+- if @side_column_sections
+  = render "shared/side_column"

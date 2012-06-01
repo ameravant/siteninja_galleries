@@ -1,0 +1,12 @@
+- galleries = Gallery.all
+- unless galleries.empty?
+  .side-column-section.galleries{:id => "section-#{section.id}"}
+    %h2= section.title
+    %ul.list-of-links.galleries
+      - for gallery in galleries
+        %li
+          = link_to(gallery.title, gallery_path(gallery))
+          - if @gallery and gallery == @gallery and !gallery.images.empty? and section.section_format == "include_images"
+            %ul.list-of-links.image-list
+              - for image in gallery.images
+                %li= link_to(image.title, [gallery, image])
