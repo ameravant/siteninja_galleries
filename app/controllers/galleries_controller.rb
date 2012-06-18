@@ -13,7 +13,7 @@ class GalleriesController < ApplicationController
     begin
       @gallery = Gallery.find(params[:id])
       @owner = @gallery
-      @page = Page.find_by_permalink!('galleries') if @gallery.menus.empty?
+      @page = Page.find_by_permalink!('galleries')# if @gallery.menus.empty?
       @gallery.menus.empty? ? @menu = @page.menus.first : @menu = @gallery.menus.first
       @smoothgallery = true if @gallery.slideshow?
       if !@gallery.column.blank? or !@page.column.blank?
