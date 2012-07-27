@@ -1,13 +1,14 @@
-%h1=section.title
-- galleries = Gallery.public
-- if galleries.empty?
-  %p No image galleries yet.
-- else
-  - for gallery in galleries
-    %div{:id => dom_id(gallery), :class => "gallery #{cycle(nil,nil,nil,'endrow')}"}
-      .gallery-thumb-container
-        .gallery-thumb= link_to(image_tag(gallery.images.sort_by(&:position).first.image.url(:medium)), gallery)
-      = clear
-      .gallery-name= link_to(h(gallery.title), gallery)
-      = clear
-= clear
+.slice.main-column-section{:id => "section-#{section.id}"}
+  %h1=section.title
+  - galleries = Gallery.public
+  - if galleries.empty?
+    %p No image galleries yet.
+  - else
+    - for gallery in galleries
+      %div{:id => dom_id(gallery), :class => "gallery #{cycle(nil,nil,nil,'endrow')}"}
+        .gallery-thumb-container
+          .gallery-thumb= link_to(image_tag(gallery.images.sort_by(&:position).first.image.url(:medium)), gallery)
+        = clear
+        .gallery-name= link_to(h(gallery.title), gallery)
+        = clear
+  = clear
