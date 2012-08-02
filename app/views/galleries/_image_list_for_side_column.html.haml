@@ -8,7 +8,7 @@
         %li{:class => image_class}
           = link_to(image.title, [@owner, image])
           - if section.section_format == "include_ratings"
-            - rating_collection = Rating.all(:conditions => ["rateable_type = ? and rateable_id = ? and rating != ?", "Image", image.id, nil])
+            - rating_collection = Rating.all(:conditions => ["rateable_type = ? and rateable_id = ? and rating > ?", "Image", image.id, 0])
             - rating_total = 0
             - if rating_collection.size > 0
               - rating_collection.each{|x| rating_total += x.rating}
