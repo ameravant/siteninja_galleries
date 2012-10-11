@@ -12,7 +12,7 @@ class Admin::GalleriesController < AdminController
     else
       @all_galleries = Gallery.find(:all, :conditions => ["title like ?", "%#{params[:q].strip}%"])
     end
-    @galleries = @all_galleries.paginate(:page => params[:page], :per_page => 30)
+    @galleries = @all_galleries#.paginate(:page => params[:page], :per_page => 30)
   end
   
   def new
