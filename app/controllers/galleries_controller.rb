@@ -14,6 +14,8 @@ class GalleriesController < ApplicationController
       @gallery = Gallery.find(params[:id])
       @owner = @gallery
       @page = Page.find_by_permalink!('galleries')# if @gallery.menus.empty?
+      @main_column = ((@page.main_column_id.blank? or Column.find_by_id(@page.main_column_id).blank?) ? Column.first(:conditions => {:title => "Default", :column_location => "main_column"}) : Column.find(@page.main_column_id))
+      @main_column_sections = ColumnSection.all(:conditions => {:column_id => @main_column.id, :visible => true, :column_section_id => nil})
       @gallery.menus.empty? ? @menu = @page.menus.first : @menu = @gallery.menus.first
       @smoothgallery = true if @gallery.slideshow?
       if !@gallery.column.blank? or !@page.column.blank?

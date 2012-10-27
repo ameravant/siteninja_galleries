@@ -30,7 +30,9 @@ class GalleryCategoriesController < ApplicationController
       if @gallery_category.blank?
         render_404
       else
-        @page = Page.find_by_permalink('galleries') if @gallery_category.menus.empty?
+        @page = Page.find_by_permalink('galleries')# if @gallery_category.menus.empty?
+        @main_column = ((@page.main_column_id.blank? or Column.find_by_id(@page.main_column_id).blank?) ? Column.first(:conditions => {:title => "Default", :column_location => "main_column"}) : Column.find(@page.main_column_id))
+        @main_column_sections = ColumnSection.all(:conditions => {:column_id => @main_column.id, :visible => true, :column_section_id => nil})
       end
     else
       unless @page = Page.find_by_permalink('galleries')
