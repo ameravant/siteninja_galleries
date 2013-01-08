@@ -5,7 +5,12 @@ class GalleriesController < ApplicationController
   
   def index
     @galleries = Gallery.public
-    @page = Page.find_by_permalink!('galleries')
+    if @page.page_layout.blank?
+      @main_column = Column.first(:conditions => {:title => "Default", :column_location => "main_column"})
+    else
+      @main_column = Column.find(@page.main_column_id)
+    end
+    @main_column_sections = ColumnSection.all(:conditions => {:column_id => @main_column.id, :visible => true, :column_section_id => nil})
     add_breadcrumb "Galleries"
   end
   
@@ -13,8 +18,15 @@ class GalleriesController < ApplicationController
     begin
       @gallery = Gallery.find(params[:id])
       @owner = @gallery
-      @page = Page.find_by_permalink!('galleries')# if @gallery.menus.empty?
-      @main_column = ((@page.main_column_id.blank? or Column.find_by_id(@page.main_column_id).blank?) ? Column.first(:conditions => {:title => "Default", :column_location => "main_column"}) : Column.find(@page.main_column_id))
+      if @gallery.page_layout.blank?
+        if @page.page_layout.blank?
+          @main_column = Column.first(:conditions => {:title => "Default", :column_location => "main_column"})
+        else
+          @main_column = Column.find(@page.main_column_id)
+        end
+      else
+        @main_column = Column.find(@gallery.main_column_id)
+      end
       @main_column_sections = ColumnSection.all(:conditions => {:column_id => @main_column.id, :visible => true, :column_section_id => nil})
       @gallery.menus.empty? ? @menu = @page.menus.first : @menu = @gallery.menus.first
       @smoothgallery = true if @gallery.slideshow?
@@ -40,6 +52,7 @@ class GalleriesController < ApplicationController
     def find_page
       @tags = Image.tag_counts
       @footer_pages = Page.find(:all, :conditions => {:show_in_footer => true}, :order => :footer_pos )
+      @page = Page.find_by_permalink("galleries")
     end
   
 end

@@ -68,6 +68,7 @@ class Admin::GalleriesController < AdminController
 
   def get_side_columns
     @side_columns = Column.all(:conditions => {:column_location => "side_column"})
+    @layouts = Column.all(:conditions => {:column_location => "main_column"})
   end
   
   def find_gallery

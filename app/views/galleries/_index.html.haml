@@ -1,0 +1,12 @@
+%h1 Image Galleries
+- if @galleries.empty?
+  %p No galleries yet.
+- else
+  - for gallery in @galleries
+    %div{:class => "gallery", :id => "#{gallery}"}
+      .gallery-thumb-container
+        .gallery-thumb
+          = link_to(image_tag(gallery.images.sort_by(&:position).first.image.url(:medium), :alt => gallery.title), gallery)
+      = clear
+      %div{:class => "big gallery-name"}
+        = link_to(h(gallery.title), gallery)

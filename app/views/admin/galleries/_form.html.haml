@@ -19,9 +19,14 @@
         %br
         = collection_select(:gallery, :gallery_category_id, GalleryCategory.all, :id, :title, {:include_blank => "Select a Gallery Category"}, :class => "select")
         %br
-      = f.label :column_id, "Side Column"
-      %br
-      = collection_select(:gallery, :column_id, @side_columns, :id, :title, {:include_blank => "Select a Side Column"}, :class => "select")
+      - if !@cms_config['site_settings']['enable_responsive_layouts']
+        = f.label :column_id, "Side Column"
+        %br
+        = collection_select(:gallery, :column_id, @side_columns, :id, :title, {:include_blank => "Select a Side Column"}, :class => "select")
+      - else
+        = f.label :main_column_id, "Layout"
+        %br
+        = collection_select(:gallery, :main_column_id, @layouts, :id, :title, {:include_blank => "Select a Layout"}, :class => "select")      
       %br
       = f.check_box :hidden
       = f.label :hidden, "Hide this gallery"
