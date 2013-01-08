@@ -1,17 +1,11 @@
 - if @gallery
   .slice.side-column-section.image-thumbs{:id => "section-#{section.id}"}
     - @gallery.images.sort_by(&:position).each_with_index do |image, i|
-      - if i == 0
+      .image
         .image-thumb-container
-          .main-image-thumb
-            = link_to image_tag(image.image(:slide), :alt => h(image.title), :style => "width: 280px; "), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title)
-        = clear
-      - else
-        .image
-          .image-thumb-container
-            .image-thumb
-              - unless image.description.blank? and image.show_rating? and !image.video_url.blank?
-                = link_to image_tag(image.small_thumbnail, :alt => h(image.title), :title => h(image.title)), [@gallery, image]
-              - else
-                = link_to image_tag(image.small_thumbnail, :alt => h(image.title), :title => h(image.title)), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title)
-    .clear
+          .image-thumb
+            - unless image.description.blank? and image.show_rating? and !image.video_url.blank?
+              = link_to image_tag(image.small_thumbnail, :alt => h(image.title), :title => h(image.title)), [@gallery, image]
+            - else
+              = link_to image_tag(image.small_thumbnail, :alt => h(image.title), :title => h(image.title)), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title)
+  .clear
