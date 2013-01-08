@@ -2,7 +2,7 @@
   - @image_list = @owner.images
 - if @image_list and !@image_list.empty?
   .slice.side-column-section.image-list{:id => "section-#{section.id}"}
-    %ul.list-of-links
+    %ul.list_of_links
       - for image in @image_list
         - (@image and @image == image) ? image_class = "selected" : image_class = ""
         %li{:class => image_class}
