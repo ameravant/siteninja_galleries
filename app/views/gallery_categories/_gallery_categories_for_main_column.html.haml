@@ -5,9 +5,9 @@
     %ul.list-of-links
       - for category in categories
         %li
-          = link_to(category.title, gallery_category_path(category))
+          = link_to(category.title, (category.galleries.size == 1) ? gallery_path(category.galleries.first) : gallery_category_path(category))
           - if @gallery_category and @gallery_category == category and section.section_format == "include_galleries"
             - unless category.galleries.empty?
               %ul.list-of-links
                 - for gallery in category.galleries
-                  %li= link_to(gallery.title, gallery_path(gallery))
+                  %li{:class => (@gallery and @gallery.id == gallery.id) ? "selected gallery" : "gallery"}= link_to(gallery.title, gallery_path(gallery))
