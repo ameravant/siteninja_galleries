@@ -10,4 +10,4 @@
             - unless category.galleries.empty?
               %ul.list-of-links
                 - for gallery in category.galleries
-                  %li{:class => (@gallery and @gallery.id == gallery.id) ? "selected gallery" : "gallery"}= link_to(gallery.title, gallery_path(gallery))
+                  %li{:class => (@gallery and @gallery.id == gallery.id) ? "selected gallery" : "gallery-item"}= link_to(gallery.title, gallery_path(gallery))
