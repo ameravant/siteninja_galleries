@@ -4,10 +4,10 @@
     %h2= section.title
     %ul.list-of-links.gallery-categories
       - for category in categories
-        %li
+        %li{:class => (@gallery_category and @gallery_category == category) ? "selected" : ""}
           = link_to(category.title, gallery_category_path(category))
           - if @gallery_category and @gallery_category == category and section.section_format == "include_galleries"
             - unless category.galleries.empty?
               %ul.list-of-links.galleries
                 - for gallery in category.galleries
-                  %li= link_to(gallery.title, gallery_path(gallery))
+                  %li{:class => (@gallery and @gallery == gallery) ? "selected" : ""}= link_to(gallery.title, gallery_path(gallery))
