@@ -3,7 +3,9 @@
 - if !@gallery_category.column.blank?
   - @side_column_sections = @gallery_category.column.column_sections
   = render "shared/side_column"
-
+- elsif !@page.column.blank?
+  - @side_column_sections = @page.column.column_sections
+  = render "shared/side_column"
 %h1= @gallery_category.title
 - if @gallery_category.galleries.empty?
   %p No galleries yet.
