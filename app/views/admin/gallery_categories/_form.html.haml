@@ -11,10 +11,22 @@
         %dd.form-option
           = f.select :template_id, @templates.collect {|ac| [ac.title, ac.id]}, {:include_blank => "Select Template"}
       %dl
-        %dt.form-label
-          = f.label :column_id, "Side Column"
-        %dd.form-option
-          = f.select :column_id, Column.all(:conditions => {:column_location => "side_column"}).collect {|ac| [ac.title, ac.id]}, {:include_blank => "Select Side Column"}
+        - if !@cms_config['site_settings']['enable_responsive_layouts']
+          %dt.form-label
+            = f.label :column_id, "Side Column"
+          %dd.form-option
+            = collection_select(:gallery, :column_id, @side_columns, :id, :title, {:include_blank => "Select a Side Column"}, :class => "select")
+        - else
+          %dt.form-label
+            = f.label :main_column_id, "Layout"
+          %dd.form-option
+            = collection_select(:gallery, :main_column_id, @layouts, :id, :title, {:include_blank => "Select a Layout"}, :class => "select")      
+      - if @gallery_category.galleries.size > 0
+        %dl
+          %dt.form-label
+            = f.label :cover_gallery_id
+          %dd.form-option
+            = f.select :cover_gallery_id, @gallery_category.galleries.collect {|ac| [ac.title, ac.id]}, {:include_blank => "Select a Cover Gallery"}
 %br
 %br
 &nbsp;

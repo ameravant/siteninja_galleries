@@ -3,6 +3,7 @@ class Admin::GalleryCategoriesController < AdminController
   before_filter :authorization
   before_filter :find_gallery_category, :only => [ :edit, :update, :destroy ]
   before_filter :add_crumbs
+  before_filter :get_layouts
   add_breadcrumb "Categories", "admin_gallery_categories_path", :except => [ :index, :destroy ]
   add_breadcrumb "New Category", nil, :only => [ :new, :create ]
   
@@ -45,6 +46,11 @@ class Admin::GalleryCategoriesController < AdminController
   end
 
   private
+
+  def get_layouts
+    @side_columns = Column.all(:conditions => {:column_location => "side_column"})
+    @layouts = Column.all(:conditions => {:column_location => "main_column"})
+  end
 
   def find_gallery_category
     begin
