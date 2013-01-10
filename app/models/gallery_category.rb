@@ -4,6 +4,7 @@ class GalleryCategory < ActiveRecord::Base
   belongs_to :template
   belongs_to :column
   belongs_to :page_layout, :class_name => "Column", :foreign_key => :main_column_id
+  belongs_to :cover_gallery, :class_name => "Gallery", :foreign_key => :cover_gallery_id
   has_many :features, :as => :featurable, :dependent => :destroy
   has_many :images, :as => :viewable, :dependent => :destroy
   has_many :menus, :as => :navigatable, :dependent => :destroy
