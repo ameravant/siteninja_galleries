@@ -4,7 +4,7 @@
       .image
         .image-thumb-container
           .image-thumb
-            - unless image.description.blank? and image.show_rating? and !image.video_url.blank?
+            - unless image.description.blank? and image.show_rating? and !image.video_url.blank? and section.section_format == ""
               = link_to image_tag(image.small_thumbnail, :alt => h(image.title), :title => h(image.title)), [@gallery, image]
             - else
               = link_to image_tag(image.small_thumbnail, :alt => h(image.title), :title => h(image.title)), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title)
