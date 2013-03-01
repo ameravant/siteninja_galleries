@@ -1,4 +1,4 @@
-- if @gallery and @gallery.images.size > 1 and @image
+- if @gallery and @gallery.images.size > 1
   .slice.side-column-section.image-thumbs{:id => "section-#{section.id}"}
     - @gallery.images.sort_by(&:position).each_with_index do |image, i|
       .image
