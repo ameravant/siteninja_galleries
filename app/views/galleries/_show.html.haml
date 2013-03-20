@@ -60,9 +60,7 @@
                 = link_to image_tag(image.small_thumbnail, :alt => h(image.title), :title => h(image.title)), [@gallery, image]
               - else
                 = link_to image_tag(image.small_thumbnail, :alt => h(image.title), :title => h(image.title)), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title)
-  - content_for :head do
-    %style{:type => "text/css"}
-      div.image-thumb { height: 55px; width: 85px; }
+
 
 - else
   - for image in @gallery.images.sort_by(&:position)

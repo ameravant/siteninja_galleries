@@ -22,3 +22,5 @@
 .rating-sm-input a:hover { background: url(http://s3.amazonaws.com/siteninja/site-ninja1-com/1341519428/original/alt_star_sm.gif) repeat-x left -24px; }
 .rating-sm-full { background: url(http://s3.amazonaws.com/siteninja/site-ninja1-com/1341519428/original/alt_star_sm.gif) repeat-x left 0; width: 60px; height: 12px; }
 .rating-sm-total { background: url(http://s3.amazonaws.com/siteninja/site-ninja1-com/1341519428/original/alt_star_sm.gif) repeat-x left -12px; height: 12px; }
+
+#side-column div.image-thumb { height: 55px; width: 85px; }
