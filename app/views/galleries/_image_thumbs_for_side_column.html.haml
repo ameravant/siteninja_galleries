@@ -1,11 +1,10 @@
 - if @gallery and @gallery.images.size > 1
-  .slice.side-column-section.image-thumbs{:id => "section-#{section.id}"}
-    - @gallery.images.sort_by(&:position).each_with_index do |image, i|
-      .image
-        .image-thumb-container
-          .image-thumb
-            - unless (image.description.blank? and image.show_rating? and !image.video_url.blank?) or section.section_format == "fancy"
-              = link_to image_tag(image.small_thumbnail, :alt => h(image.title), :title => h(image.title)), [@gallery, image]
-            - else
-              = link_to image_tag(image.small_thumbnail, :alt => h(image.title), :title => h(image.title)), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title)
-  .clear
+  - @gallery.images.sort_by(&:position).each_with_index do |image, i|
+    .image
+      .image-thumb-container
+        .image-thumb
+          - unless (image.description.blank? and image.show_rating? and !image.video_url.blank?) or section.section_format == "fancy"
+            = link_to image_tag(image.medium_thumbnail, :alt => h(image.title), :title => h(image.title)), [@gallery, image]
+          - else
+            = link_to image_tag(image.medium_thumbnail, :alt => h(image.title), :title => h(image.title)), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title)
+.clear
