@@ -1,7 +1,7 @@
 %h1
   = h @gallery.title
 - if @cms_config["site_settings"]["hide_default_gallery_view"]
-  -# do nothing
+  = @gallery.body
 - elsif @gallery.slideshow?
   - @slideshow = true
   - @use_galleryview = true
