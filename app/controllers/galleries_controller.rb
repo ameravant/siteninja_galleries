@@ -18,6 +18,7 @@ class GalleriesController < ApplicationController
     begin
       @gallery = Gallery.find(params[:id])
       @owner = @gallery
+      @images = @gallery.images
       if @gallery.page_layout.blank?
         if @page.page_layout.blank?
           @main_column = Column.first(:conditions => {:title => "Default", :column_location => "main_column"})
