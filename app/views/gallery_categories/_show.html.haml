@@ -3,12 +3,13 @@
   %p No galleries yet.
 - else
   - for gallery in @gallery_category.galleries
-    %div{:class => "gallery", :id => "#{gallery}"}
-      .gallery-thumb-container
-        .gallery-thumb
-          = link_to(image_tag(gallery.images.sort_by(&:position).first.image.url(:medium), :alt => gallery.title), gallery_path(gallery))
-      = clear
-      %div{:class => "big gallery-name"}
-        = link_to(h(gallery.title), gallery_path(gallery))
+    - if gallery.images_count > 0
+      %div{:class => "gallery", :id => "#{gallery}"}
+        .gallery-thumb-container
+          .gallery-thumb
+            = link_to(image_tag(gallery.images.sort_by(&:position).first.image.url(:medium), :alt => gallery.title), gallery_path(gallery))
+        = clear
+        %div{:class => "big gallery-name"}
+          = link_to(h(gallery.title), gallery_path(gallery))
 
 
