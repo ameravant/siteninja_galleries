@@ -27,8 +27,20 @@
             = f.label :cover_gallery_id
           %dd.form-option
             = f.select :cover_gallery_id, @gallery_category.galleries.collect {|ac| [ac.title, ac.id]}, {:include_blank => "Select a Cover Gallery"}
-%br
-%br
+  = clear
+  #body-wrapper
+    .options#body-details
+      .inserts
+        %strong Insert:
+        %br
+        = render :partial => "admin/shared/parser_help"
+        = render :partial => "admin/shared/asset_options"
+        = render :partial => "admin/shared/insert_map"
+
+    %div{:style => "width: 560px;"}
+      %h2.form-label
+        = f.label :description, "Body"
+      = f.text_area :description, :size => "100x40", :class => "mceEditor"
 &nbsp;
 - fancy_submit admin_event_categories_path do
   = f.submit "Save category"
