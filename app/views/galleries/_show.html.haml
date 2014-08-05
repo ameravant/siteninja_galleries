@@ -31,6 +31,7 @@
     });
   %ul#gallery-slideshow.galleryview
     - for image in @gallery.images
+      - large_image = @cms_config['site_settings']['original_feature_images'] ? image.image.url(:original) : image.image.url(:large)
       %li
         = image_tag(image.small_thumbnail, :title => image.title, :alt => image.title, :style => "width: 85px; height: 55px", :class => "content-img")
         .gv-panel-content
@@ -50,7 +51,7 @@
       - if i == 0
         .image-thumb-container
           .main-image-thumb
-            = link_to image_tag(image.image(:slide), :alt => h(image.title), :style => "width: 280px; "), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title)
+            = link_to image_tag(image.image(:slide), :alt => h(image.title), :style => "width: 280px; "), large_image, :class => "fancy", :rel => "gallery", :title => h(image.title)
         = clear
       - else
         .image
@@ -59,7 +60,7 @@
               - unless image.description.blank? and image.show_rating? and !image.video_url.blank?
                 = link_to image_tag(image.small_thumbnail, :alt => h(image.title), :title => h(image.title)), [@gallery, image]
               - else
-                = link_to image_tag(image.small_thumbnail, :alt => h(image.title), :title => h(image.title)), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title)
+                = link_to image_tag(image.small_thumbnail, :alt => h(image.title), :title => h(image.title)), large_image, :class => "fancy", :rel => "gallery", :title => h(image.title)
 
 
 - else
@@ -70,7 +71,7 @@
           - unless image.description.blank? and !image.show_rating? and image.video_url.blank?
             = link_to image_tag(image.image.url(:medium), :alt => h(image.title), :title => h(image.title)), [@gallery, image]
           - else
-            = link_to image_tag(image.image.url(:medium), :alt => h(image.title), :title => h(image.title)), image.image.url(:large), :class => "fancy", :rel => "gallery"
+            = link_to image_tag(image.image.url(:medium), :alt => h(image.title), :title => h(image.title)), large_image, :class => "fancy", :rel => "gallery"
         - unless image.caption.blank?
           .image-caption
             =image.caption
