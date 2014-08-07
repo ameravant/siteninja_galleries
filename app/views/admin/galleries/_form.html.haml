@@ -8,6 +8,8 @@
   .main-fields
     %h2.title.form-label= f.label :title, "Title"
     = f.text_field :title, :class => "big-input"
+    %h2.title.form-label
+    = file_field_tag('images[]', :multiple => "true")
     .note.required *Required
     %h2.form-label= f.label :description, "Short Description"
     = f.text_area :description, :class => "big-area", :placeholder => "For features and meta description."

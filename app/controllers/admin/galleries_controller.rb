@@ -41,6 +41,17 @@ class Admin::GalleriesController < AdminController
   
   def update
     if @gallery.update_attributes(params[:gallery])
+      position = @gallery.images.size
+      if params[:images]
+        params[:images].each do |image|
+          position = position + 1
+          @image = @gallery.images.build
+          @image.image = image
+          @image.position = position
+          @image.title = "#{@gallery.title}-#{@image.position}"
+          @image.save
+        end
+      end
       flash[:notice] = "#{@gallery.title} gallery updated."
       redirect_to admin_galleries_path
     else

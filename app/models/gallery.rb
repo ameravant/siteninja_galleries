@@ -2,6 +2,8 @@ class Gallery < ActiveRecord::Base
   unloadable
   has_permalink :title
   has_many :images, :as => :viewable, :dependent => :destroy
+  accepts_nested_attributes_for :images, :allow_destroy => true
+  attr_accessible :title, :description, :attached_assets_attributes
   has_many :features, :as => :featurable, :dependent => :destroy
   has_many :menus, :as => :navigatable, :dependent => :destroy
   belongs_to :gallery_category
