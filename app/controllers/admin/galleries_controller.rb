@@ -32,8 +32,17 @@ class Admin::GalleriesController < AdminController
   def create
     @gallery = current_user.galleries.build params[:gallery]
     if @gallery.save
-      flash[:notice] = "#{@gallery.title} gallery created. Start adding images below!"
-      redirect_to [:admin, @gallery]
+      position = 0
+      params[:images].each do |image|
+        position = position + 1
+        @image = @gallery.images.build
+        @image.image = image
+        @image.position = position
+        @image.title = "#{@gallery.title}-#{@image.position}"
+        @image.save
+      end
+      flash[:notice] = "#{@gallery.title} gallery created."
+      redirect_to [:admin, @gallery, :images]
     else
       render :action => "new"
     end
