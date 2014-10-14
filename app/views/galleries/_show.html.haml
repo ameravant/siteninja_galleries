@@ -59,9 +59,9 @@
           .image-thumb-container
             .image-thumb
               - unless image.description.blank? and image.show_rating? and !image.video_url.blank?
-                = link_to image_tag(image.small_thumbnail, :alt => h(image.title), :title => h(image.title)), [@gallery, image]
+                = link_to image_tag(image.small_thumbnail, :alt => h(image.title)), [@gallery, image], :title => h(image.title)
               - else
-                = link_to image_tag(image.small_thumbnail, :alt => h(image.title), :title => h(image.title)), large_image, :class => "fancy", :rel => "gallery", :title => h(image.title)
+                = link_to image_tag(image.small_thumbnail, :alt => h(image.title)), large_image, :title => h(image.title), :class => "fancy", :rel => "gallery", :title => h(image.title)
 
 
 - else
@@ -71,9 +71,9 @@
       .image-thumb-container
         .image-thumb
           - unless image.description.blank? and !image.show_rating? and image.video_url.blank?
-            = link_to image_tag(image.image.url(:medium), :alt => h(image.title), :title => h(image.title)), [@gallery, image]
+            = link_to image_tag(image.image.url(:medium), :alt => h(image.title)), [@gallery, image], :title => h(image.title)
           - else
-            = link_to image_tag(image.image.url(:medium), :alt => h(image.title), :title => h(image.title)), large_image, :class => "fancy", :rel => "gallery"
+            = link_to image_tag(image.image.url(:medium), :alt => h(image.title)), large_image, :title => h(image.title), :class => "fancy", :rel => "gallery"
         - unless image.caption.blank?
           .image-caption
             =image.caption
