@@ -31,6 +31,8 @@ class Admin::GalleriesController < AdminController
   
   def create
     @gallery = current_user.galleries.build params[:gallery]
+    @gallery.main_column_id = params[:gallery][:main_column_id]
+    @gallery.body = params[:gallery][:body]
     if @gallery.save
       position = 0
       params[:images].each do |image|
@@ -50,6 +52,7 @@ class Admin::GalleriesController < AdminController
   
   def update
     @gallery.main_column_id = params[:gallery][:main_column_id]
+    @gallery.body = params[:gallery][:body]
     if @gallery.update_attributes(params[:gallery])
       position = @gallery.images.size
       if params[:images]
