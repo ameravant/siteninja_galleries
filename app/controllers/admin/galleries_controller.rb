@@ -49,6 +49,7 @@ class Admin::GalleriesController < AdminController
   end
   
   def update
+    @gallery.main_column_id = params[:gallery][:main_column_id]
     if @gallery.update_attributes(params[:gallery])
       position = @gallery.images.size
       if params[:images]

@@ -1,5 +1,5 @@
 - if @gallery and @gallery.images.size > 1
-  - @gallery.images.sort_by(&:position).each_with_index do |image, i|
+  - Image.all(:conditions => {:viewable_type => "Gallery", :viewable_id => @gallery.id, :show_in_image_box => true}).sort_by(&:position).each_with_index do |image, i|
     .image
       .image-thumb-container
         .image-thumb

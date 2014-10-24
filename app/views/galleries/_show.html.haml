@@ -30,7 +30,7 @@
     });
     });
   %ul#gallery-slideshow.galleryview
-    - for image in @gallery.images
+    - for image in Image.all(:conditions => {:viewable_type => "Gallery", :viewable_id => @gallery.id, :show_in_slideshow => true})
       - large_image = @cms_config['site_settings']['original_feature_images'] ? image.image.url(:original) : image.image.url(:large)
       %li
         = image_tag(image.small_thumbnail, :title => image.title, :alt => image.title, :style => "width: 85px; height: 55px", :class => "content-img")
@@ -47,7 +47,7 @@
 - elsif !@gallery.body.blank?
   = @gallery.body
   - content_for :side_column do
-    - @gallery.images.sort_by(&:position).each_with_index do |image, i|
+    - Image.all(:conditions => {:viewable_type => "Gallery", :viewable_id => @gallery.id, :show_in_image_box => true}).sort_by(&:position).each_with_index
       - large_image = @cms_config['site_settings']['original_feature_images'] ? image.image.url(:original) : image.image.url(:large)
       - if i == 0
         .image-thumb-container
@@ -65,7 +65,7 @@
 
 
 - else
-  - for image in @gallery.images.sort_by(&:position)
+  - Image.all(:conditions => {:viewable_type => "Gallery", :viewable_id => @gallery.id, :show_in_image_box => true}).sort_by(&:position).each_with_index do |image, i|
     - large_image = @cms_config['site_settings']['original_feature_images'] ? image.image.url(:original) : image.image.url(:large)
     .image
       .image-thumb-container
