@@ -1,6 +1,6 @@
 - galleries = Gallery.public
 - unless galleries.empty?
-  .slice.side-column-section.galleries{:id => "section-#{section.id}"}
+  .galleries
     %h2= section.title
     %ul.list-of-links.galleries
       - for gallery in galleries
