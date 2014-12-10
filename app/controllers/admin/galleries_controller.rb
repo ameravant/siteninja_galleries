@@ -35,13 +35,15 @@ class Admin::GalleriesController < AdminController
     @gallery.body = params[:gallery][:body]
     if @gallery.save
       position = 0
-      params[:images].each do |image|
-        position = position + 1
-        @image = @gallery.images.build
-        @image.image = image
-        @image.position = position
-        @image.title = "#{@gallery.title}-#{@image.position}"
-        @image.save
+      if params[:images]
+        params[:images].each do |image|
+          position = position + 1
+          @image = @gallery.images.build
+          @image.image = image
+          @image.position = position
+          @image.title = "#{@gallery.title}-#{@image.position}"
+          @image.save
+        end
       end
       flash[:notice] = "#{@gallery.title} gallery created."
       redirect_to [:admin, @gallery, :images]
