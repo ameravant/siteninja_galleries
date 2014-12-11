@@ -8,7 +8,9 @@
   .main-fields
     %h2.title.form-label= f.label :title, "Title"
     = f.text_field :title, :class => "big-input"
+    %br
     %h2.title.form-label
+    Attach Images 
     = file_field_tag('images[]', :multiple => "true")
     .note.required *Required
     %h2.form-label= f.label :description, "Short Description"
