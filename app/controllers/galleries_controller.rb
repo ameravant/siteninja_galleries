@@ -4,6 +4,7 @@ class GalleriesController < ApplicationController
   add_breadcrumb 'Home', "root_path"
   
   def index
+    expires_in 60.minutes, :public => true
     @galleries = Gallery.public
     if @page.page_layout.blank?
       @main_column = Column.first(:conditions => {:title => "Default", :column_location => "main_column"})
@@ -16,6 +17,7 @@ class GalleriesController < ApplicationController
   
   def show
     begin
+      expires_in 60.minutes, :public => true
       @gallery = Gallery.find(params[:id])
       @owner = @gallery
       @images = @gallery.images
