@@ -54,21 +54,23 @@ class Admin::GalleriesController < AdminController
   end
   
   def update
+    position = @gallery.images.size
+    if params[:images]
+      params[:images].each do |image|
+        position = position + 1
+        @image = @gallery.images.build
+        @image.image = image
+        @image.position = position
+        @image.title = "#{@gallery.title}-#{@image.position}"
+        @image.save
+      end
+    end
     @gallery.main_column_id = params[:gallery][:main_column_id]
     @gallery.body = params[:gallery][:body]
     @gallery.gallery_category_id = params[:gallery][:gallery_category_id] if params[:gallery][:gallery_category_id]
+    @gallery.slideshow = params[:gallery][:slideshow]
+    @gallery.hidden = params[:gallery][:hidden]
     if @gallery.update_attributes(params[:gallery])
-      position = @gallery.images.size
-      if params[:images]
-        params[:images].each do |image|
-          position = position + 1
-          @image = @gallery.images.build
-          @image.image = image
-          @image.position = position
-          @image.title = "#{@gallery.title}-#{@image.position}"
-          @image.save
-        end
-      end
       flash[:notice] = "#{@gallery.title} gallery updated."
       redirect_to admin_galleries_path
     else
@@ -87,7 +89,9 @@ class Admin::GalleriesController < AdminController
 
   def reorder
     params["tree"].each_with_index do |id, position|
-      Gallery.update(id, :position => position + 1)
+      g = Gallery.find_by_id(id)
+      g.position = position + 1
+      g.save
     end
     render :nothing => true
   end
