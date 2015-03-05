@@ -7,7 +7,7 @@ class GalleryCategoriesController < ApplicationController
   
   def show
     begin
-      expires_in 60.minutes, :public => true
+      #expires_in 60.minutes, :public => true
       @gallery_category.menus.empty? ? @menu = @page.menus.first : @menu = @gallery_category.menus.first
       @galleries = @gallery_category.galleries
       add_breadcrumb @gallery_category.title
