@@ -1,6 +1,10 @@
+- if section.section_format == "category"
+  - if @gallery_category
+    - galleries = Gallery.public.reject{|x| x.gallery_category_id != @gallery_category.id}
+- else
+  - galleries = Gallery.public
 .galleries
   %h1=section.title
-  - galleries = Gallery.public
   - if galleries.empty?
     %p No image galleries yet.
   - else
