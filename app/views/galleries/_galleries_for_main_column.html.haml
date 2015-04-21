@@ -1,6 +1,5 @@
-- if section.section_format == "category"
-  - if @gallery_category
-    - galleries = Gallery.public.reject{|x| x.gallery_category_id != @gallery_category.id}
+- if section.section_format == "category" and @gallery_category
+  - galleries = Gallery.public.reject{|x| x.gallery_category_id != @gallery_category.id}
 - else
   - galleries = Gallery.public
 .galleries
