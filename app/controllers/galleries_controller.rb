@@ -42,7 +42,7 @@ class GalleriesController < ApplicationController
           @side_column_sections = @gallery.column.column_sections
         end
       end
-      @gallery_category = @gallery.gallery_category unless @gallery. .blank?
+      @gallery_category = @gallery.gallery_category unless @gallery.gallery_category.blank?
       add_breadcrumb "Galleries", galleries_path
       add_breadcrumb @gallery.title 
     rescue ActiveRecord::RecordNotFound
