@@ -1,8 +1,8 @@
 - content_for :meta_title do
   = @gallery_category.title
 - content_for :pre_footer do
-    %script
-      == var galleryCategoryTitle = "#{@gallery_category.title}"
+  %script
+    == var galleryCategoryTitle = "#{@gallery_category.title}"
 - if !@cms_config['site_settings']['enable_responsive_layouts']
   - if !@gallery_category.column.blank?
     - @side_column_sections = @gallery_category.column.column_sections
