@@ -49,6 +49,8 @@
         .gallery-thumbnail
           = image_tag(gallery.images.sort_by(&:position).first.image.url(:thumb), :class => "icon thumb") unless gallery.images.empty?
         = link_to(gallery.title, [:edit, :admin, gallery])
+        - if gallery.gallery_category
+          .note= gallery.gallery_category.title
       .gallery-options
         - if gallery.menus_count > 0
           = navigation_icon(gallery, gallery.title, "inline")
