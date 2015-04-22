@@ -21,7 +21,9 @@ class GalleriesController < ApplicationController
       @gallery = Gallery.find(params[:id])
       @owner = @gallery
       @images = @gallery.images
-      if @gallery.page_layout.blank?
+      if !params[:page_layout].blank?
+        @main_column = Column.find(params[:page_layout])
+      elsif @gallery.page_layout.blank?
         if @page.page_layout.blank?
           @main_column = Column.first(:conditions => {:title => "Default", :column_location => "main_column"})
         else
@@ -40,7 +42,7 @@ class GalleriesController < ApplicationController
           @side_column_sections = @gallery.column.column_sections
         end
       end
-      @gallery_category = @gallery.gallery_category unless @gallery.gallery_category.blank?
+      @gallery_category = @gallery.gallery_category unless @gallery. .blank?
       add_breadcrumb "Galleries", galleries_path
       add_breadcrumb @gallery.title 
     rescue ActiveRecord::RecordNotFound
