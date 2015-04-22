@@ -18,7 +18,7 @@
       %div{:class => "gallery", :id => "#{gallery}"}
         .gallery-thumb-container
           .gallery-thumb
-            = link_to(image_tag(gallery.images.sort_by(&:position).first.image.thumbnail, :alt => gallery.title), gallery_path(gallery))
+            = link_to(image_tag(gallery.images.sort_by(&:position).first.thumbnail, :alt => gallery.title), gallery_path(gallery))
         = clear
         %div{:class => "big gallery-name"}
           = link_to(h(gallery.title), gallery_path(gallery))
