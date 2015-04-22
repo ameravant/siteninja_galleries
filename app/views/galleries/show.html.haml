@@ -2,7 +2,10 @@
   = h @gallery.title
 - content_for :meta_description do
   = @gallery.description
-  
+- if @gallery.gallery_category
+  - content_for :pre_footer do
+    %script
+      == var galleryCategory = "#{@gallery.gallery_category.title}"
 - if !@cms_config['site_settings']['enable_responsive_layouts']
   %h1
     = h @gallery.title
