@@ -1,5 +1,8 @@
 - content_for :meta_title do
   = @gallery_category.title
+- content_for :meta_description do
+  = "A listing of galleries in the #{@gallery_category.title} category."
+  = " - Page #{params[:page]}" if params[:page]
 - content_for :pre_footer do
   %script
     == var galleryCategoryTitle = "#{@gallery_category.title}"
