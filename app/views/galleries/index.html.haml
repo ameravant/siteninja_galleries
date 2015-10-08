@@ -1,5 +1,6 @@
 - content_for :meta_title do
   Image Galleries
+  = " - Page #{params[:page]}" if params[:page]
 - if !@page.column.blank?
   - @side_column_sections = @page.column.column_sections
   = render "shared/side_column"
