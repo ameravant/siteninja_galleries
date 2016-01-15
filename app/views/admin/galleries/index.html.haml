@@ -47,7 +47,7 @@
       .gallery-title
         = image_tag("#{move_loc}", :class => "icon handle")
         .gallery-thumbnail
-          = image_tag(gallery.images.sort_by(&:position).first.image.url(:thumb), :class => "icon thumb") unless gallery.images.empty?
+          = image_tag(gallery.images.sort_by(&:position).first.image.url(:thumb), :class => "icon thumb") unless gallery.images.size < 1
         = link_to(gallery.title, [:edit, :admin, gallery])
         - if gallery.gallery_category
           %span.note= gallery.gallery_category.title
