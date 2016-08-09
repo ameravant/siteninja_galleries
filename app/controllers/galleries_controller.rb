@@ -46,8 +46,8 @@ class GalleriesController < ApplicationController
       add_breadcrumb "Galleries", galleries_path
       add_breadcrumb @gallery.title 
     rescue ActiveRecord::RecordNotFound
-      flash[:error] = "That gallery could not be found. It may have been deleted."
-      redirect_to galleries_path
+      #flash[:error] = "That gallery could not be found. It may have been deleted."
+      #redirect_to galleries_path
     end
   end
   
