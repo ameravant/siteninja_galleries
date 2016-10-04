@@ -1,4 +1,4 @@
-%h1 Galleries
+%h1= yield(:meta_title).strip
 - if @galleries.empty?
   %p No galleries yet.
 - else
