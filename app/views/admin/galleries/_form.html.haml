@@ -15,6 +15,10 @@
     = file_field_tag('images[]', :multiple => "true")
     %h2.form-label= f.label :description, "Short Description"
     = f.text_area :description, :class => "big-area", :placeholder => "For features and meta description."
+    - if current_user.is_super_user and !@gallery.permalink.blank?
+      %h2.title.form-label= f.label :permalink, "Permalink"
+      = f.text_field :permalink, :class => "big-input", :disabled => @no_edit
+      .note Modifies permalink.
   #main-details.details.options 
     #options
       %h3 Gallery Options
