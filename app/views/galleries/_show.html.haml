@@ -52,7 +52,7 @@
       - if i == 0
         .image-thumb-container
           .main-image-thumb
-            = link_to image_tag(image.image(:slide), :alt => h(image.title), :style => "width: 280px; "), large_image, :class => "fancy", :rel => "gallery", :title => h(image.title)
+            = link_to image_tag(image.image(:slide), :alt => h(image.title), :style => "width: 280px; "), large_image, :class => "fancy", :rel => "gallery", :title => h(image.title), "data-fancybox" => "gallery"
         = clear
       - else
         .image
@@ -61,7 +61,7 @@
               - unless image.description.blank? and image.show_rating? and !image.video_url.blank?
                 = link_to image_tag(image.small_thumbnail, :alt => h(image.title)), [@gallery, image], :title => h(image.title)
               - else
-                = link_to image_tag(image.small_thumbnail, :alt => h(image.title)), large_image, :title => h(image.title), :class => "fancy", :rel => "gallery", :title => h(image.title)
+                = link_to image_tag(image.small_thumbnail, :alt => h(image.title)), large_image, :title => h(image.title), :class => "fancy", :rel => "gallery", :title => h(image.title), "data-fancybox" => "gallery"
 
 
 - else
@@ -73,7 +73,7 @@
           - unless image.description.blank? and !image.show_rating? and image.video_url.blank?
             = link_to image_tag(image.thumbnail, :alt => h(image.title)), [@gallery, image], :title => h(image.title)
           - else
-            = link_to image_tag(image.thumbnail, :alt => h(image.title)), large_image, :title => h(image.title), :class => "fancy", :rel => "gallery"
+            = link_to image_tag(image.thumbnail, :alt => h(image.title)), large_image, :title => h(image.title), :class => "fancy", :rel => "gallery", "data-fancybox" => "gallery"
         - unless image.caption.blank?
           .image-caption
             =image.caption
