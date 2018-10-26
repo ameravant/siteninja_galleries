@@ -19,12 +19,12 @@
           %dt.form-label
             = f.label :column_id, "Side Column"
           %dd.form-option
-            = collection_select(:gallery, :column_id, @side_columns, :id, :title, {:include_blank => "Select a Side Column"}, :class => "select")
+            = collection_select(:gallery_category, :column_id, @side_columns, :id, :title, {:include_blank => "Select a Side Column"}, :class => "select")
         - else
           %dt.form-label
             = f.label :main_column_id, "Layout"
           %dd.form-option
-            = collection_select(:gallery, :main_column_id, @layouts, :id, :title, {:include_blank => "Select a Layout"}, :class => "select")      
+            = collection_select(:gallery_category, :main_column_id, @layouts, :id, :title, {:include_blank => "Select a Layout"}, :class => "select")      
       - if @gallery_category.galleries.size > 0
         %dl
           %dt.form-label
