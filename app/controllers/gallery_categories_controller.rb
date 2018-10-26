@@ -13,6 +13,7 @@ class GalleryCategoriesController < ApplicationController
       add_breadcrumb @gallery_category.title
       if !@gallery_category.page_layout.blank?
         @main_column = Column.find_by_id(@gallery_category.main_column_id)
+        @main_column_sections = ColumnSection.all(:conditions => {:column_id => @main_column.id, :visible => true, :column_section_id => nil})
       end
     end
     # respond_to do |wants|
