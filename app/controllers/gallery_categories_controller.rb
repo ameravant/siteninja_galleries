@@ -11,7 +11,7 @@ class GalleryCategoriesController < ApplicationController
       @gallery_category.menus.empty? ? @menu = @page.menus.first : @menu = @gallery_category.menus.first
       @galleries = @gallery_category.galleries
       add_breadcrumb @gallery_category.title
-      if !@gallery_category.main_column.blank?
+      if !@gallery_category.page_layout.blank?
         @main_column = Column.find_by_id(@gallery_category.main_column_id)
       end
     end
