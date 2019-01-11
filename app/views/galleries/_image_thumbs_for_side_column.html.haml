@@ -6,7 +6,7 @@
           - unless (image.description.blank? and image.show_rating? and !image.video_url.blank?) or section.section_format == "fancy"
             = link_to image_tag(image.thumbnail, :alt => h(image.title), :title => h(image.title)), [@gallery, image]
           - else
-            = link_to image_tag(image.thumbnail, :alt => h(image.title), :title => h(image.title)), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title)
+            = link_to image_tag(image.thumbnail, :alt => h(image.title), :title => h(image.title)), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title), "data-fancybox" => "gallery", "data-caption" => image.title
       - if !image.caption.blank? and section.section_format == "with_captions"
         .image-caption
           =image.caption
