@@ -3,11 +3,11 @@
     .image
       .image-thumb-container
         .image-thumb
-          - unless (image.description.blank? and image.show_rating? and !image.video_url.blank?) or section.section_format == "fancy"
+          - unless (image.description.blank? and image.show_rating? and !image.video_url.blank?) or section.section_format == "fancy" or section.section_format == "fancy_with_captions"
             = link_to image_tag(image.thumbnail, :alt => h(image.title), :title => h(image.title)), [@gallery, image]
           - else
             = link_to image_tag(image.thumbnail, :alt => h(image.title), :title => h(image.title)), image.image.url(:large), :class => "fancy", :rel => "gallery", :title => h(image.title), "data-fancybox" => "gallery", "data-caption" => image.title
-      - if !image.caption.blank? and section.section_format == "with_captions"
+      - if !image.caption.blank? and (section.section_format == "with_captions" or section.section_format == "fancy_with_captions")
         .image-caption
           =image.caption
 .clear
