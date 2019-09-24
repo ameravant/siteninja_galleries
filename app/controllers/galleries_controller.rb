@@ -48,6 +48,7 @@ class GalleriesController < ApplicationController
     rescue ActiveRecord::RecordNotFound
       #flash[:error] = "That gallery could not be found. It may have been deleted."
       #redirect_to galleries_path
+      render_404
     end
   end
   
