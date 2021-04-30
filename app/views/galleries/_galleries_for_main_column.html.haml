@@ -10,7 +10,7 @@
     - for gallery in galleries
       %div{:id => dom_id(gallery), :class => "gallery #{cycle(nil,nil,nil,'endrow')}"}
         .gallery-thumb-container
-          .gallery-thumb= link_to(image_tag(gallery.images.sort_by(&:position).first.thumbnail), gallery)
+          .gallery-thumb= link_to(tag(:img, "data-src" => gallery.images.sort_by(&:position).first.thumbnail, :class => "lazyload"), gallery)
         = clear
         .gallery-name= link_to(h(gallery.title), gallery)
         = clear
