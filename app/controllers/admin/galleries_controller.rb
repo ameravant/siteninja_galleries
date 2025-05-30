@@ -28,7 +28,7 @@ class Admin::GalleriesController < AdminController
         csv_data = FasterCSV.generate do |csv|
           csv << ["ID", "Title", "Content", "Excerpt", "Date", "Post Type", "Permalink", "Image URL", "Image Title", "Image Caption", "Image Description", "Image Alt Text", "Image Featured", "Attachment URL", "Categories", "Status", "Slug", "Comment Status", "Ping Status", "Post Modified Date"]#, "images_count", "assets_count", "features_count"]
           @all_galleries.each do |gallery|
-            gallery_body = gallery.rendered_body.blank? ? gallery.body : gallery.rendered_body.gsub('data-src', 'src')
+            #gallery_body = gallery.rendered_body.blank? ? gallery.body : gallery.rendered_body.gsub('data-src', 'src')
             i = Image.first(:conditions => {:viewable_id => gallery.id, :viewable_type => "Gallery", :show_as_cover_image => true})
             i = Image.first(:conditions => {:viewable_id => gallery.id, :viewable_type => "Gallery", :show_in_image_box => true}) if i.blank?
             i = Image.first(:conditions => {:viewable_id => gallery.id, :viewable_type => "Gallery", :show_in_slideshow => true}) if i.blank?
