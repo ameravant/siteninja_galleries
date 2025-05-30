@@ -25,6 +25,8 @@
     = link_to "<i class=\"fas fa-plus-circle\"></i> Make a new Gallery", new_admin_gallery_path
   %span.hmenu
     = link_to "<i class=\"far fa-folder\"></i> Manage Gallery Categories", admin_gallery_categories_path
+  %span.hmenu
+    = link_to "<i class=\"fas fa-save\"></i> Export CSV", "/admin/galleries?csv=true"
 
 %br
 %div.gallery-title-header
