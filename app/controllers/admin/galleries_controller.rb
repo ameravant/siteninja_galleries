@@ -46,7 +46,7 @@ class Admin::GalleriesController < AdminController
             images = Image.all(:conditions => {:viewable_id => gallery.id, :viewable_type => "Gallery"}, :order => "show_as_cover_image, position asc")
             status = gallery.hidden ? "draft" : "publish"
             
-            csv << [gallery.id, gallery.title, gallery.body, gallery.description, gallery.created_at.strftime("%Y-%m-%d %H:%M:%S"), "gallery", gallery_url(gallery), images.collect{|i| i.image(:original)}.join(','), images.collect{|i| i.title}.join(','), images.collect{|i| i.caption}.join(','), images.collect{|i| i.description}.join(','), images.collect{|i| i.title}.join(','), image_url, "", gallery.gallery_category.title, status, gallery.permalink, "closed", "closed", gallery.updated_at.strftime("%Y-%m-%d %H:%M:%S")]
+            csv << [gallery.id, gallery.title, gallery.body, gallery.description, gallery.created_at.strftime("%Y-%m-%d %H:%M:%S"), "gallery", gallery_url(gallery), images.collect{|i| i.image(:original)}.join(','), images.collect{|i| i.title}.join(','), images.collect{|i| i.caption}.join(','), images.collect{|i| i.description}.join(','), images.collect{|i| i.title}.join(','), image_url, "", gallery.gallery_category ? gallery.gallery_category.title : '', status, gallery.permalink, "closed", "closed", gallery.updated_at.strftime("%Y-%m-%d %H:%M:%S")]
           end
         end
         send_data csv_data,
